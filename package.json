@@ -1,6 +1,6 @@
 {
   "name": "grobrix",
-  "version": "0.1.0",
+  "version": "24.1.0",
   "private": true,
   "scripts": {
     "dev": "next dev",
@@ -12,7 +12,8 @@
     "next": "14.0.4",
     "react": "^18",
     "react-dom": "^18",
-    "sass": "^1.69.6"
+    "sass": "^1.69.6",
+    "swr": "^2.2.4"
   },
   "devDependencies": {
     "@types/node": "^20",

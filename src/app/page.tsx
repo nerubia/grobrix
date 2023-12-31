@@ -2,6 +2,11 @@ import Image from 'next/image';
 import styles from './page.module.scss';
 import buttonStyle from '@/_components/button.module.scss';
 import InputComponent from '@/_components/input.component';
+import useSWR from 'swr';
+
+const fetcher = (url: string, opts: { [k: string]: unknown }) =>
+  fetch(url, opts).then((res) => res.json());
+
 export default function Home() {
   return (
     <main className={styles.mainWrapper}>
