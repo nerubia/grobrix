@@ -1,0 +1,10 @@
+.button {
+    @apply flex items-center justify-center gap-2 mt-4;
+    svg {
+        @apply h-5
+    }
+}
+.primary {
+    @apply bg-[#43732F] text-white stroke-white p-2.5 rounded-full;
+    box-shadow: 0px 12px 32px 0px #276F2D42;
+}

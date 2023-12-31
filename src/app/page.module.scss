@@ -1,0 +1,24 @@
+.mainWrapper {
+    @apply flex mx-auto h-screen lg:max-h-[844px] lg:w-full lg:max-w-[390px] lg:rounded-[2.4rem] flex-col items-center justify-between bg-contain bg-no-repeat bg-[url(/backdrop.jpg)];
+    .formWrapper {
+        @apply bg-white p-8 pb-24 rounded-b-none lg:rounded-b-[2.4rem] rounded-[2.4rem] shadow-2xl w-full flex flex-col justify-center text-center;
+        .leaf {
+            @apply bg-center mx-auto h-8 w-8 mb-8 mt-2 bg-contain bg-no-repeat bg-[url(/leaf.svg)];
+        }
+        .formTitle {
+            @apply pb-2;
+            font-size: 20px;
+            font-weight: 600;
+            line-height: 25px;
+            letter-spacing: 0.01em;
+        }
+        .formInfo {
+            @apply text-neutral-400;
+            font-size: 14px;
+            font-weight: 300;
+            line-height: 18px;
+            letter-spacing: 0em;
+            text-align: center;
+        }
+    }
+}
