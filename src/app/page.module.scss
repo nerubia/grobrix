@@ -1,5 +1,5 @@
 .wrapper {
-    @apply bg-contain bg-no-repeat bg-[url(/backdrop.jpg)] h-full w-full flex-1 flex flex-col;
+    @apply bg-contain bg-no-repeat bg-[url(/backdrop.jpg)] h-dvh w-full flex-1 flex flex-col;
     .formWrapper {
         @apply bg-white p-8 pb-24 rounded-b-none lg:rounded-b-[2.4rem] rounded-[2.4rem] shadow-2xl w-full flex flex-col justify-center text-center;
         .leaf {
