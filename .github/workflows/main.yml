@@ -9,7 +9,7 @@ jobs:
   deploy:
     runs-on: ubuntu-latest
     steps:
-    - run: "curl -X POST -H 'Content-type: application/json' --data '{\"text\":\"Deploying ${{ github.ref_type }} ${{ github.ref_name }}\"}' ${{ vars.NOTIFICATION_HOOK }}"
+    - run: "curl -X POST -H 'Content-type: application/json' --data '{\"text\":\"Deploying **${{ github.ref_name }}** ${{ github.ref_type }}\"}' ${{ vars.NOTIFICATION_HOOK }}"
     - uses: actions/checkout@master
     - name: "Use Node.js"
       uses: actions/setup-node@v3
