@@ -15,7 +15,7 @@ jobs:
       with:
         node-version: '20.x'
         cache: 'npm'
-    - run: curl -X POST -H 'Content-type: application/json' --data '{"text":"Hello, World!"}' ${{ env.NOTIFICATION_HOOK }}
+    - run: "curl -X POST -H 'Content-type: application/json' --data '{\"text\":\"Hello, World!\"}' ${{ env.NOTIFICATION_HOOK }}"
     - run: npm install
     - run: npm ci
     - run: npm run build
