@@ -44,3 +44,5 @@ jobs:
     - name: Invalidate cache
       run:
           aws cloudfront create-invalidation --distribution-id ${{ secrets.AWS_CF_DIST_ID }} --paths "/*"
+    - name: Notify invalidation completion
+      run: "curl -X POST -H 'Content-type: application/json' --data '{\"text\":\"Static site cache invalidated for ${{ github.ref_name }} ${{ github.ref_type }}.  All should be good :rocket:\"}' ${{ vars.NOTIFICATION_HOOK }}"
