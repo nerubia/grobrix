@@ -9,7 +9,7 @@ jobs:
   deploy:
     runs-on: ubuntu-latest
     steps:
-    - run: "curl -X POST -H 'Content-type: application/json' --data '{\"text\":\"Deploying **${{ github.ref_name }}** ${{ github.ref_type }}\"}' ${{ vars.NOTIFICATION_HOOK }}"
+    - run: "curl -X POST -H 'Content-type: application/json' --data '{\"text\":\"Deploying ${{ github.ref_name }} ${{ github.ref_type }}\"}' ${{ vars.NOTIFICATION_HOOK }}"
     - uses: actions/checkout@master
     - name: "Use Node.js"
       uses: actions/setup-node@v3
@@ -19,6 +19,7 @@ jobs:
     - run: npm install
     - run: npm ci
     - run: npm run build
+    - run: "curl -X POST -H 'Content-type: application/json' --data '{\"text\":\"${{ github.ref_type }}:${{ github.ref_name }} - npm build completed\"}' ${{ vars.NOTIFICATION_HOOK }}"
     - name: Configure AWS Credentials
       uses: aws-actions/configure-aws-credentials@v1
       with:
@@ -26,8 +27,8 @@ jobs:
         aws-secret-access-key: ${{ secrets. AWS_SECRET_ACCESS_KEY }}
         aws-region: us-west-1
     - name: Copy files to the s3 website content bucket
-      run:
-          aws s3 sync out s3://${{ secrets.AWS_S3_BUCKET }} --delete
+    - run: aws s3 sync out s3://${{ secrets.AWS_S3_BUCKET }} --delete
+    - run: "curl -X POST -H 'Content-type: application/json' --data '{\"text\":\"${{ github.ref_type }}:${{ github.ref_name }} - Upload to S3 complete.\"}' ${{ vars.NOTIFICATION_HOOK }}"
   invalidate:
     needs: deploy
     runs-on: ubuntu-latest
@@ -39,5 +40,6 @@ jobs:
         aws-secret-access-key: ${{ secrets. AWS_SECRET_ACCESS_KEY }}
         aws-region: us-west-1
     - name: Invalidate cache
-      run:
-          aws cloudfront create-invalidation --distribution-id ${{ secrets.AWS_CF_DIST_ID }} --paths "/*"
+    - run: "curl -X POST -H 'Content-type: application/json' --data '{\"text\":\"${{ github.ref_type }}:${{ github.ref_name }} - Invalidating CloudFront cache.\"}' ${{ vars.NOTIFICATION_HOOK }}"
+    - run: aws cloudfront create-invalidation --distribution-id ${{ secrets.AWS_CF_DIST_ID }} --paths "/*"
+    - run: "curl -X POST -H 'Content-type: application/json' --data '{\"text\":\"${{ github.ref_type }}:${{ github.ref_name }} - All done! :rocket:\"}' ${{ vars.NOTIFICATION_HOOK }}"
