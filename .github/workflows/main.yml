@@ -28,6 +28,9 @@ jobs:
     - name: Copy files to the s3 website content bucket
       run:
           aws s3 sync out s3://${{ secrets.AWS_S3_BUCKET }} --delete
+    - name: Notify deployment completion
+      run: "curl -X POST -H 'Content-type: application/json' --data '{\"text\":\"Deployment for ${{ github.ref_name }} ${{ github.ref_type }} done\"}' ${{ vars.NOTIFICATION_HOOK }}"
+      
   invalidate:
     needs: deploy
     runs-on: ubuntu-latest
